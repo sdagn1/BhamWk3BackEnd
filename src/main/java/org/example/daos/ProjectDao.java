@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectDao {
     private final int clientNumber = 3;
@@ -31,10 +34,30 @@ public class ProjectDao {
             return -1;
         }
     }
+    public List<Project> getAllProjects() throws SQLException {
+        List<Project> projects = new ArrayList<>();
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "SELECT id, name, value, completed FROM Project"
+                    +
+                    " WHERE completed=0;";
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                projects.add(new Project(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getDouble("value")));
+            }
+        }
+        return projects;
+    }
+
     public Project getProjectById(final int id)
             throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String query = "SELECT name, value, completed FROM Project"
+            String query = "SELECT id, name, value, completed FROM Project"
                     +
                     " WHERE id=?;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -44,6 +67,7 @@ public class ProjectDao {
 
             while (resultSet.next()) {
                 return new Project(
+                        resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getDouble("value"));
             }
