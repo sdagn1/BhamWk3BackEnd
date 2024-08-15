@@ -5,10 +5,13 @@ import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.Entity;
 import org.example.exceptions.FailedToCreateException;
 import org.example.exceptions.InvalidException;
+import org.example.mappers.DeliveryEmployeeMapper;
 import org.example.models.DeliveryEmployeeRequest;
+import org.example.models.DeliveryEmployeeResponse;
 import org.example.validators.DeliveryEmployeeValidator;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class DeliveryEmployeeService {
 
@@ -22,6 +25,20 @@ public class DeliveryEmployeeService {
                                            deliveryEmployeeValidator) {
         this.deliveryEmployeeDao = deliveryEmployeeDao;
         this.deliveryEmployeeValidator = deliveryEmployeeValidator;
+    }
+
+
+    public List<DeliveryEmployeeResponse> getAllDeliveryEmployees()
+            throws SQLException, DoesNotExistException {
+        List<DeliveryEmployeeResponse> deliveryEmployeeResponses =
+                DeliveryEmployeeMapper.mapDeliveryEmployeeListToResponseList(
+                        deliveryEmployeeDao.getAllDeliverEmployees());
+
+        if (deliveryEmployeeResponses.isEmpty()) {
+            throw new DoesNotExistException(Entity.DELIVERYEMPLOYEE);
+        }
+
+        return deliveryEmployeeResponses;
     }
 
     public int createDeliveryEmployee(final

@@ -12,6 +12,7 @@ import org.example.models.UserRole;
 import org.example.services.DeliveryEmployeeService;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -27,6 +28,29 @@ public class DeliveryEmployeeController {
     public DeliveryEmployeeController(final DeliveryEmployeeService
                                               deliveryEmployeeService) {
         this.deliveryEmployeeService = deliveryEmployeeService;
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN, UserRole.HR})
+    @ApiOperation(
+            value = "Returns all Delivery Employees",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = Employee.class
+    )
+    public Response getDeliveryEmployees() throws SQLException {
+        try {
+            return Response.ok()
+                    .entity(deliveryEmployeeService.getAllDeliveryEmployees())
+                    .build();
+        } catch (DoesNotExistException e) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
     }
 
     @POST
