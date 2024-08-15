@@ -1,33 +1,29 @@
 package org.example.models;
 
-public class Employee {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private int id;
-    private int employeeId;
+public class SalesEmployeeRequest {
     private String name;
     private double salary;
     private String bankAcc;
-    private String  ni;
-    private int type;
+    private String ni;
+    private double commissionRate;
 
+    @JsonCreator public SalesEmployeeRequest(
+            @JsonProperty("name") final String name,
+            @JsonProperty("salary") final double salary,
+            @JsonProperty("bankAcc") final String bankAcc,
+            @JsonProperty("ni") final String ni,
+            @JsonProperty("commissionRate")final double commissionRate) {
 
-    public Employee(final int id, final String name, final double salary,
-                    final String bankAcc, final String ni, final int type) {
-        this.id = id;
         this.name = name;
         this.salary = salary;
         this.bankAcc = bankAcc;
         this.ni = ni;
-        this.type = type;
+        this.commissionRate = commissionRate;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(final int employeeId) {
-        this.employeeId = employeeId;
-    }
 
     public String getName() {
         return name;
@@ -35,13 +31,6 @@ public class Employee {
 
     public void setName(final String name) {
         this.name = name;
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(final int id) {
-        this.id = id;
     }
 
     public double getSalary() {
@@ -68,11 +57,11 @@ public class Employee {
         this.ni = ni;
     }
 
-    public int getType() {
-        return type;
+    public double getCommissionRate() {
+        return commissionRate;
     }
 
-    public void setType(final int type) {
-        this.type = type;
+    public void setCommissionRate(final double commissionRate) {
+        this.commissionRate = commissionRate;
     }
 }

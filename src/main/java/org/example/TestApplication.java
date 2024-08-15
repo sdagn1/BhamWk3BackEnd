@@ -8,6 +8,10 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.example.controllers.SalesEmployeeController;
+import org.example.daos.SalesEmployeeDao;
+import org.example.services.SalesEmployeeService;
+import org.example.validators.SalesEmployeeValidator;
 import org.example.auth.JwtAuthenticator;
 import org.example.auth.RoleAuthoriser;
 import org.example.controllers.ClientController;
@@ -35,10 +39,12 @@ public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
         new TestApplication().run(args);
     }
+
     @Override
     public String getName() {
         return "Test";
     }
+
     @Override
     public void initialize(final Bootstrap<TestConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
@@ -49,6 +55,7 @@ public class TestApplication extends Application<TestConfiguration> {
             }
         });
     }
+
     @Override
     public void run(final TestConfiguration configuration,
                     final Environment environment) {
@@ -62,8 +69,11 @@ public class TestApplication extends Application<TestConfiguration> {
         environment.jersey().register(RolesAllowedDynamicFeature.class);
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(
                 JwtToken.class));
-        environment.jersey()
-                .register(new ProjectController(
+        environment.jersey().register(new SalesEmployeeController(
+                new SalesEmployeeService(new SalesEmployeeDao(),
+                        new SalesEmployeeValidator())));
+        environment
+                .jersey().register(new ProjectController(
                         new ProjectService(new ProjectDao(),
                                 new ProjectValidator(new ClientService(
                                         new ClientDao())))));
