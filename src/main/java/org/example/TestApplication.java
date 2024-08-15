@@ -20,9 +20,13 @@ import org.example.services.ProjectService;
 import org.example.validators.ProjectValidator;
 import io.jsonwebtoken.Jwts;
 import org.example.controllers.AuthController;
+import org.example.controllers.DeliveryEmployeeController;
 import org.example.daos.AuthDao;
+import org.example.daos.DeliveryEmployeeDao;
 import org.example.services.AuthService;
+import org.example.services.DeliveryEmployeeService;
 import org.example.validators.AuthValidator;
+import org.example.validators.DeliveryEmployeeValidator;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import java.security.Key;
@@ -65,6 +69,11 @@ public class TestApplication extends Application<TestConfiguration> {
                                         new ClientDao())))));
         environment.jersey().register(new AuthController(new AuthService(
                 new AuthDao(), new AuthValidator(), jwtKey)));
+        environment.jersey().register(new DeliveryEmployeeController(
+                new DeliveryEmployeeService(
+                        new DeliveryEmployeeDao(),
+                        new DeliveryEmployeeValidator())
+        ));
         environment.jersey().register(new ClientController(
                 new ClientService(new ClientDao())));
     }
