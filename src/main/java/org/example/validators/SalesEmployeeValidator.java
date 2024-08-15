@@ -6,7 +6,8 @@ import org.example.models.SalesEmployeeRequest;
 
 public class SalesEmployeeValidator {
     private final int nameLength = 50;
-    private final int bankAccNILength = 8;
+    private final int backAccLength = 8;
+    private final int niLength = 9;
 
     public void validateSalesEmployee(
             final SalesEmployeeRequest salesEmployeeRequest)
@@ -17,11 +18,11 @@ public class SalesEmployeeValidator {
                     "Name greater than 50 characters");
         }
 
-        if (salesEmployeeRequest.getBankAcc().length() > bankAccNILength) {
+        if (salesEmployeeRequest.getBankAcc().length() > backAccLength) {
             throw new InvalidException(Entity.SALESEMPLOYEE,
                     "Bank account is more than 8 characters");
         }
-        if (salesEmployeeRequest.getNi().length() > bankAccNILength) {
+        if (salesEmployeeRequest.getNi().length() > niLength) {
             throw new InvalidException(Entity.SALESEMPLOYEE,
                     "Ni is more than 8 characters");
         }
