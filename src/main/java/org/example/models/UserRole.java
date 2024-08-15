@@ -4,14 +4,17 @@ import java.util.Map;
 
 public class UserRole {
     public static final String ADMIN = "admin";
-
-    public static final String USER = "user";
+    public static final String HR = "hr";
+    public static final String MANAGEMENT = "management";
+    public static final String SALES = "sales";
 
     int roleId;
 
     private static final Map<Integer, String> ROLESMAP = Map.of(
             1, ADMIN,
-            2, USER
+            2, HR,
+            3, MANAGEMENT,
+            4, SALES
     );
 
     public UserRole(final int roleId) {
