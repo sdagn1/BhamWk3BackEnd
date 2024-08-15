@@ -8,7 +8,9 @@ public class Employee {
     private String  ni;
     private int type;
 
-    public Employee(final int employeeId, final String name, final double salary, final String bankAcc,
+    public Employee(final int employeeId,
+                    final String name, final double salary,
+                    final String bankAcc,
                     final String ni, final int type) {
         this.employeeId = employeeId;
         this.name = name;
@@ -38,7 +40,7 @@ public class Employee {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
 
@@ -46,7 +48,7 @@ public class Employee {
         return bankAcc;
     }
 
-    public void setBankAcc(String bankAcc) {
+    public void setBankAcc(final String bankAcc) {
         this.bankAcc = bankAcc;
     }
 
@@ -54,7 +56,7 @@ public class Employee {
         return ni;
     }
 
-    public void setNi(String ni) {
+    public void setNi(final String ni) {
         this.ni = ni;
     }
 
@@ -62,7 +64,7 @@ public class Employee {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(final int type) {
         this.type = type;
     }
 }

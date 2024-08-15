@@ -2,7 +2,6 @@ package org.example.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.example.daos.SalesEmployeeDao;
 
 public class SalesEmployeeRequest {
     private String name;

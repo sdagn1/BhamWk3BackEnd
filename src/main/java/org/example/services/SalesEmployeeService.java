@@ -16,8 +16,9 @@ public class SalesEmployeeService {
 
 
 
-    public SalesEmployeeService(final SalesEmployeeDao salesEmployeeDao,
-                                final SalesEmployeeValidator salesEmployeeValidator) {
+    public SalesEmployeeService(
+            final SalesEmployeeDao salesEmployeeDao,
+            final SalesEmployeeValidator salesEmployeeValidator) {
         this.salesEmployeeDao = salesEmployeeDao;
         this.salesEmployeeValidator = salesEmployeeValidator;
     }
