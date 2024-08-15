@@ -30,11 +30,11 @@ public class DeliveryEmployeeValidator {
             throw new InvalidException(Entity.DELIVERYEMPLOYEE,
                     "Ni is too long");
         }
-        if (deliveryEmployeeRequest.getType() != 1
-                &&
-                deliveryEmployeeRequest.getType() != 2) {
-            throw new InvalidException(Entity.DELIVERYEMPLOYEE,
-                    "Type is not valid");
-        }
+//        if (deliveryEmployeeRequest.getType() != 1
+//                &&
+//                deliveryEmployeeRequest.getType() != 2) {
+//            throw new InvalidException(Entity.DELIVERYEMPLOYEE,
+//                    "Type is not valid");
+//        }
     }
 }
