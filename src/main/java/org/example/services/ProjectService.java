@@ -36,7 +36,8 @@ public class ProjectService {
     }
 
     public void completeProject(final int id)
-            throws SQLException, DoesNotExistException {
+            throws SQLException, DoesNotExistException, InvalidException {
+        projectValidator.validateProjectId(id);
         Project projectToUpdate = projectDao.getProjectById(id);
         if (projectToUpdate == null) {
             throw new DoesNotExistException(Entity.PROJECT);

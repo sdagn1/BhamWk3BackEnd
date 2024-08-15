@@ -66,7 +66,7 @@ public class ProjectController {
         try {
             projectService.completeProject(id);
             return Response.noContent().build();
-        } catch (SQLException e) {
+        } catch (InvalidException | SQLException e) {
             return Response.serverError().build();
         } catch (DoesNotExistException e) {
             return Response.status(Response.Status.NOT_FOUND)
