@@ -16,10 +16,11 @@ public class ClientDao {
         List<Client> clients = new ArrayList<>();
         try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
-            String query = "SELECT name FROM Client;";
+            String query = "SELECT id, name FROM Client;";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 clients.add(new Client(
+                        resultSet.getInt("id"),
                         resultSet.getString("name"))
                 );
             }
@@ -30,12 +31,13 @@ public class ClientDao {
     public Client getClientById(final int id)
             throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String query = "SELECT name FROM Client WHERE id = ?;";
+            String query = "SELECT id, name FROM Client WHERE id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 return new Client(
+                        resultSet.getInt("id"),
                         resultSet.getString("name"));
             }
             return null;
