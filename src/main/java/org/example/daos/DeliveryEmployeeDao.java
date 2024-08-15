@@ -18,7 +18,7 @@ public class DeliveryEmployeeDao {
 
         String insertStatement =
                 "INSERT INTO `Employee`(name, salary, bank_acc, ni, type)"
-                        + "VALUES (?,?,?,?,?);";
+                        + "VALUES (?,?,?,?,1);";
 
         PreparedStatement st = c.prepareStatement(insertStatement,
                 Statement.RETURN_GENERATED_KEYS);
@@ -27,7 +27,6 @@ public class DeliveryEmployeeDao {
         st.setDouble(2, deliveryEmployeeRequest.getSalary());
         st.setString(1 + 2, deliveryEmployeeRequest.getBankAcc());
         st.setString(2 + 2, deliveryEmployeeRequest.getNi());
-        st.setInt(2 + 2 + 1, deliveryEmployeeRequest.getType());
 
         st.executeUpdate();
 
