@@ -1,18 +1,14 @@
 package org.example;
 
 import io.dropwizard.Application;
-import io.dropwizard.auth.Auth;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.jsonwebtoken.Jwts;
 import org.example.controllers.AuthController;
-import org.example.controllers.TestController;
 import org.example.daos.AuthDao;
-import org.example.daos.TestDao;
 import org.example.services.AuthService;
-import org.example.services.TestService;
 
 import java.security.Key;
 
