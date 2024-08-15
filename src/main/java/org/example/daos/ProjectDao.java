@@ -1,5 +1,6 @@
 package org.example.daos;
 
+import org.example.models.Project;
 import org.example.models.ProjectRequest;
 
 import java.sql.Connection;
@@ -28,6 +29,39 @@ public class ProjectDao {
                 return resultSet.getInt(1);
             }
             return -1;
+        }
+    }
+    public Project getProjectById(final int id)
+            throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "SELECT name, value, completed FROM Project"
+                    +
+                    " WHERE id=?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                return new Project(
+                        resultSet.getString("name"),
+                        resultSet.getDouble("value"));
+            }
+            return null;
+        }
+    }
+
+    public void completeProject(final int id)
+            throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String updateStatement =
+                    "UPDATE Project SET completed=1 "
+                            +
+                            "WHERE id=?;";
+            PreparedStatement stmt =
+                    connection.prepareStatement(updateStatement);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
         }
     }
 }

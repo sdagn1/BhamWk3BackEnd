@@ -1,7 +1,10 @@
 package org.example.services;
 
 import org.example.daos.ProjectDao;
+import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.Entity;
 import org.example.exceptions.InvalidException;
+import org.example.models.Project;
 import org.example.models.ProjectRequest;
 import org.example.validators.ProjectValidator;
 
@@ -26,5 +29,14 @@ public class ProjectService {
             int x = 1;
         }
         return id;
+    }
+
+    public void completeProject(final int id)
+            throws SQLException, DoesNotExistException {
+        Project projectToUpdate = projectDao.getProjectById(id);
+        if (projectToUpdate == null) {
+            throw new DoesNotExistException(Entity.PROJECT);
+        }
+        projectDao.completeProject(id);
     }
 }
