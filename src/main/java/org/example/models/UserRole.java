@@ -4,7 +4,6 @@ import java.util.Map;
 
 public class UserRole {
     public static final String ADMIN = "admin";
-
     public static final String HR = "hr";
     public static final String MANAGEMENT = "management";
     public static final String SALES = "sales";
