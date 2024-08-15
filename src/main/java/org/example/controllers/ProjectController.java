@@ -55,6 +55,10 @@ public class ProjectController {
     @PUT
     @Path("/project/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN, UserRole.MANAGEMENT})
+    @ApiOperation(
+            value = "Completes a Project",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION))
     public Response completeProject(
             @PathParam("id") final int id) {
         try {
