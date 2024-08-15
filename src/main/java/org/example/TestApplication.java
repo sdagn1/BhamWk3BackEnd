@@ -10,6 +10,7 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.example.auth.JwtAuthenticator;
 import org.example.auth.RoleAuthoriser;
+import org.example.controllers.ClientController;
 import org.example.controllers.ProjectController;
 import org.example.daos.ClientDao;
 import org.example.daos.ProjectDao;
@@ -64,6 +65,8 @@ public class TestApplication extends Application<TestConfiguration> {
                                         new ClientDao())))));
         environment.jersey().register(new AuthController(new AuthService(
                 new AuthDao(), new AuthValidator(), jwtKey)));
+        environment.jersey().register(new ClientController(
+                new ClientService(new ClientDao())));
     }
 
 }
