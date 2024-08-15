@@ -1,32 +1,27 @@
 package org.example.models;
 
-public class Employee {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private int id;
-    private int employeeId;
+public class DeliveryEmployeeRequest {
     private String name;
     private double salary;
     private String bankAcc;
-    private String  ni;
+    private String ni;
     private int type;
 
-
-    public Employee(final int id, final String name, final double salary,
-                    final String bankAcc, final String ni, final int type) {
-        this.id = id;
+    @JsonCreator
+    public DeliveryEmployeeRequest(
+            @JsonProperty("name") final String name,
+            @JsonProperty("salary") final double salary,
+            @JsonProperty("bankAcc") final String bankAcc,
+            @JsonProperty("ni") final String ni,
+            @JsonProperty("type") final int type) {
         this.name = name;
         this.salary = salary;
         this.bankAcc = bankAcc;
         this.ni = ni;
         this.type = type;
-    }
-
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(final int employeeId) {
-        this.employeeId = employeeId;
     }
 
     public String getName() {
@@ -35,13 +30,6 @@ public class Employee {
 
     public void setName(final String name) {
         this.name = name;
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(final int id) {
-        this.id = id;
     }
 
     public double getSalary() {

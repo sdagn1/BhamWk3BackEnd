@@ -16,6 +16,12 @@ public class ProjectValidator {
         this.clientService = clientService;
     }
 
+    public void validateProjectId(final int id) throws InvalidException {
+        if (id <= 0) {
+            throw new InvalidException(Entity.PROJECT, "ID is less than 0");
+        }
+    }
+
     public void validateProject(final ProjectRequest projectRequest)
             throws InvalidException, SQLException {
         if (projectRequest.getName().length() > nameLength) {

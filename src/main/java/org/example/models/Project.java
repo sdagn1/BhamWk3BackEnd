@@ -1,11 +1,13 @@
 package org.example.models;
 
 public class Project {
+    private int id;
     private String name;
 
     private double value;
 
-    public Project(final String name, final double value) {
+    public Project(final int id, final String name, final double value) {
+        this.id = id;
         this.name = name;
         this.value = value;
     }
@@ -25,5 +27,13 @@ public class Project {
 
     public void setValue(final double value) {
         this.value = value;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 }
