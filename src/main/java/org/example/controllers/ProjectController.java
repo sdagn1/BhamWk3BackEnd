@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.example.exceptions.InvalidException;
 import org.example.models.ProjectRequest;
-import org.example.models.User;
 import org.example.models.UserRole;
 import org.example.services.ProjectService;
 
