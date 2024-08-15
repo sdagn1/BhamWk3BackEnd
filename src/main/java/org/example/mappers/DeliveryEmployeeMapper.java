@@ -6,9 +6,11 @@ import org.example.models.Employee;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DeliveryEmployeeMapper {
+public final class DeliveryEmployeeMapper {
 
-    public DeliveryEmployeeMapper() {
+    private DeliveryEmployeeMapper() {
+        throw new UnsupportedOperationException("This is a utility class "
+                + "and cannot be instantiated");
     }
 
     public static List<DeliveryEmployeeResponse>
