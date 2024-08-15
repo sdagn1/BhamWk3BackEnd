@@ -1,17 +1,16 @@
 package org.example.exceptions;
 
 public enum Entity {
-    PROJECT("Project");
+    PROJECT("Project"),
+    USER("User");
 
     private final String entity;
+
     Entity(final String entity) {
         this.entity = entity;
-
     }
 
     public String getEntity() {
-
-        return this.entity;
-
+        return entity;
     }
 }
