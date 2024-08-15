@@ -9,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import org.example.controllers.AuthController;
 import org.example.daos.AuthDao;
 import org.example.services.AuthService;
+import org.example.validators.AuthValidator;
 
 import java.security.Key;
 
@@ -36,7 +37,7 @@ public class TestApplication extends Application<TestConfiguration> {
         Key jwtKey = Jwts.SIG.HS256.key().build();
 
         environment.jersey().register(new AuthController(new AuthService(
-                new AuthDao(), jwtKey)));
+                new AuthDao(), new AuthValidator(), jwtKey)));
     }
 
 }
